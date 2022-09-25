@@ -3,7 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\CategoriesRequest;
+use App\Models\Category;
 
 class CategoryController extends Controller
 {
@@ -14,7 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        return Category::all();
     }
 
     /**
@@ -23,9 +24,11 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CategoriesRequest $request)
     {
-        //
+        $category = Category::create($request->all());
+
+        return response()->json($category, 201);
     }
 
     /**
@@ -34,9 +37,15 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(int $id)
     {
-        //
+        $category = Category::find($id);
+
+        if(!$category) {
+            return response()->json(['mensagem' => 'Categoria não encontrada'], 404);
+        }
+
+        return $category;
     }
 
     /**
@@ -46,9 +55,16 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CategoriesRequest $request, int $id)
     {
-        //
+        $category = Category::find($id);
+
+        if(!$category) {
+            return response()->json(['mensagem' => 'Categoria não encontrada'], 404);
+        }
+
+        $category->update($request->all());
+        return $category;
     }
 
     /**
@@ -57,8 +73,12 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(int $id)
     {
-        //
+        if(Category::destroy($id)) {
+            return response()->json(['mensagem' => 'Categoria excluída com sucesso']);
+        }
+
+        return response()->json(['mensagem' => 'Categoria não encontrada'], 404);
     }
 }
