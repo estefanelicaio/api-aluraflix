@@ -15,7 +15,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('videos', function (Blueprint $table) {
-            $table->foreignIdFor(Category::class)->default(1)->constrained();
+            $table->foreignIdFor(Category::class)->default(1)->constrained()->onUpdate('cascade')->onDelete('cascade');
         });
     }
 
