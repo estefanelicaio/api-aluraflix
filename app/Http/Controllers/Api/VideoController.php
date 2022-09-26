@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\VideoRequest;
 use App\Models\Video;
+use Illuminate\Http\Request;
 
 class VideoController extends Controller
 {
@@ -13,9 +14,15 @@ class VideoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Video::all();
+        $videos = Video::query();
+
+        if($request->has('name')) {
+            $videos->where('title', 'like', "%{$request->name}%");
+        }
+
+        return $videos->get();
     }
 
     /**
