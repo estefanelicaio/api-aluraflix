@@ -22,3 +22,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::apiResource('/videos', VideoController::class);
 Route::apiResource('/categories', CategoryController::class);
+Route::get('/categories/{id}/videos', [CategoryController::class, 'get_videos_by_category_id'])->name('categories.videos');

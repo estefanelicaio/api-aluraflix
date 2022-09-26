@@ -81,4 +81,9 @@ class CategoryController extends Controller
 
         return response()->json(['mensagem' => 'Categoria não encontrada'], 404);
     }
+
+    public function get_videos_by_category_id($id)
+    {
+        return Category::with('videos')->find($id);
+    }
 }
