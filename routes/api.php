@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('/login', [LoginController::class, 'login']);
+
 Route::middleware('auth:sanctum')->group(function() {
 
     Route::apiResource('/videos', VideoController::class);
@@ -24,4 +26,4 @@ Route::middleware('auth:sanctum')->group(function() {
     Route::get('/categories/{id}/videos', [CategoryController::class, 'get_videos_by_category_id'])->name('categories.videos');
 });
 
-Route::post('/login', [LoginController::class, 'login']);
+Route::get('/free-videos', [VideoController::class, 'free'])->name('videos.free');

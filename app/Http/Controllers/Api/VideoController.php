@@ -41,10 +41,10 @@ class VideoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int $id
+     * @param  mixed $id
      * @return \Illuminate\Http\Response
      */
-    public function show(int $id)
+    public function show(mixed $id)
     {
         $video = Video::find($id);
 
@@ -87,5 +87,10 @@ class VideoController extends Controller
         }
 
         return response()->json(['mensagem' => 'Vídeo não encontrado'], 404);
+    }
+
+    public function free()
+    {
+        return Video::limit(5)->get();
     }
 }
