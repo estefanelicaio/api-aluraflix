@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\CategoryController;
+use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\VideoController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,10 +17,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::middleware('auth:sanctum')->group(function() {
+
+    Route::apiResource('/videos', VideoController::class);
+    Route::apiResource('/categories', CategoryController::class);
+    Route::get('/categories/{id}/videos', [CategoryController::class, 'get_videos_by_category_id'])->name('categories.videos');
 });
 
-Route::apiResource('/videos', VideoController::class);
-Route::apiResource('/categories', CategoryController::class);
-Route::get('/categories/{id}/videos', [CategoryController::class, 'get_videos_by_category_id'])->name('categories.videos');
+Route::post('/login', [LoginController::class, 'login']);
