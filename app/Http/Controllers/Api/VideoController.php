@@ -22,7 +22,7 @@ class VideoController extends Controller
             $videos->where('title', 'like', "%{$request->name}%");
         }
 
-        return $videos->get();
+        return $videos->paginate(5);
     }
 
     /**
