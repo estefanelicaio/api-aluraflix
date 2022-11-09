@@ -41,10 +41,10 @@ class VideoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  mixed $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show(mixed $id)
+    public function show(int $id)
     {
         $video = Video::find($id);
 
