@@ -21,7 +21,7 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\CategoriesRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(CategoriesRequest $request)
@@ -51,7 +51,7 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\CategoriesRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -82,6 +82,12 @@ class CategoryController extends Controller
         return response()->json(['mensagem' => 'Categoria não encontrada'], 404);
     }
 
+    /**
+     * Display the specified resource with videos.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
     public function findVideosByCategoryId(int $id)
     {
         $category = Category::with('videos')->find($id);
