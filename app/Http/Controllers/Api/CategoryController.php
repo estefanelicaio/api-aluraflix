@@ -84,6 +84,12 @@ class CategoryController extends Controller
 
     public function findVideosByCategoryId(int $id)
     {
-        return Category::with('videos')->find($id);
+        $category = Category::with('videos')->find($id);
+
+        if(!$category) {
+            return response()->json(['mensagem' => 'Categoria não encontrada'], 404);
+        }
+
+        return $category;
     }
 }
