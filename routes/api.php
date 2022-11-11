@@ -23,7 +23,7 @@ Route::middleware('auth:sanctum')->group(function() {
 
     Route::apiResource('/videos', VideoController::class);
     Route::apiResource('/categories', CategoryController::class);
-    Route::get('/categories/{id}/videos', [CategoryController::class, 'get_videos_by_category_id'])->name('categories.videos');
+    Route::get('/categories/{id}/videos', [CategoryController::class, 'findVideosByCategoryId'])->name('categories.videos');
 });
 
 Route::get('/free-videos', [VideoController::class, 'free'])->name('videos.free');
