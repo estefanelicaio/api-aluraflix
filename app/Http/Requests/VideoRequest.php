@@ -25,7 +25,7 @@ class VideoRequest extends FormRequest
     {
         return [
             'title' => ['required', 'max:100'],
-            'description' => 'required',
+            'description' => ['required', 'max:255'],
             'url' => ['required', 'max:100'],
         ];
     }
