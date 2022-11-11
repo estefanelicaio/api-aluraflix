@@ -28,7 +28,7 @@ class VideoController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\VideoRequest  $request
      * @return \Illuminate\Http\Response
      */
     public function store(VideoRequest $request)
@@ -58,7 +58,7 @@ class VideoController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\VideoRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
@@ -89,6 +89,11 @@ class VideoController extends Controller
         return response()->json(['mensagem' => 'Vídeo não encontrado'], 404);
     }
 
+    /**
+     * Display the free videos.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function free()
     {
         return Video::limit(5)->get();
